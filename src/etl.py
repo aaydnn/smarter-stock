@@ -88,7 +88,10 @@ def extract_uci():
         "Customer ID": "customer_id", "Country": "country",
     })
     df["invoice"] = df["invoice"].astype(str).str.strip()
-    df["stock_code"] = df["stock_code"].astype(str).str.strip()
+    # Uppercase: the same product sometimes appears as e.g. 15056BL and 15056bl.
+    # PostgreSQL treats those as different codes but Power BI does not, which
+    # breaks the dim_product relationships, so merge them here.
+    df["stock_code"] = df["stock_code"].astype(str).str.strip().str.upper()
     df["customer_id"] = (df["customer_id"].astype("Float64").astype("Int64")
                          .astype(str).replace("<NA>", "UNKNOWN"))       # rule 7
     df["country"] = df["country"].astype(str).str.strip()

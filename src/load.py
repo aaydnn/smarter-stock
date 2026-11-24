@@ -8,8 +8,9 @@ Needs a .env file in the repo root with one line:
     DB_URL=postgresql+psycopg2://postgres:YOURPASSWORD@localhost:5432/smarter_stock
 
 The tables must already exist (run sql/create_tables.sql once in pgAdmin).
-Reruns empty the sales, benchmark and dimension tables and reload them.
-fact_forecast and fact_backtest are left alone, so forecast history survives.
+Reruns empty and reload every table. Because fact_forecast and fact_backtest
+reference dim_product, they are emptied too: always run `python src/forecast.py`
+after this script.
 """
 
 import io
@@ -79,7 +80,8 @@ def main():
                 "VALUES (:r, :d, :i, :l, :u, :v)"),
                 {"r": run_id, "d": dataset, "i": rows_in, "l": rows_loaded, "u": units, "v": value})
 
-    print(f"\nLoaded run {run_id}. Next: run sql/checks.sql in pgAdmin to reconcile totals.")
+    print(f"\nLoaded run {run_id}. Forecast tables were cleared: run python src/forecast.py next,")
+    print("then sql/checks.sql in pgAdmin to reconcile totals.")
 
 
 if __name__ == "__main__":

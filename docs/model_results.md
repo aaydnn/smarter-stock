@@ -1,8 +1,8 @@
 # Model results (Step 6 backtest)
 
-Generated 2026-11-22 19:57 by `src/forecast.py`.
+Generated 2026-11-22 21:27 by `src/forecast.py`.
 
-- Products in scope: 2,107
+- Products in scope: 2,102
 - Train: origin weeks whose target week is before 2011-06-27
 - Test: origin weeks from 2011-06-27 onward (same cutoff for every product)
 - Baseline: average of the last four weeks, repeated for each future week
@@ -11,10 +11,10 @@ Generated 2026-11-22 19:57 by `src/forecast.py`.
 
 | Weeks ahead | Forest MAE | Baseline MAE | Forest WAPE | Baseline WAPE | Forest bias | Baseline bias | Forest wins (share of products) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 1 | 29.30 | 30.03 | 68.1% | 69.8% | -0% | -6% | 55% |
-| 2 | 30.21 | 30.64 | 69.7% | 70.7% | -1% | -8% | 50% |
-| 3 | 31.27 | 31.51 | 71.0% | 71.5% | -2% | -11% | 48% |
-| 4 | 32.20 | 32.26 | 72.6% | 72.8% | -2% | -13% | 47% |
+| 1 | 29.37 | 30.11 | 68.1% | 69.8% | -0% | -6% | 55% |
+| 2 | 30.30 | 30.73 | 69.6% | 70.6% | -1% | -8% | 50% |
+| 3 | 31.35 | 31.60 | 70.9% | 71.5% | -2% | -11% | 48% |
+| 4 | 32.31 | 32.35 | 72.6% | 72.7% | -2% | -13% | 47% |
 
 MAE = average absolute error in units per product-week. WAPE = total absolute error ÷ total actual units (lower is better). Bias = total predicted ÷ total actual − 1 (negative means the model under-forecasts overall, which matters for stock-outs).
 Where the baseline wins, the report shows it: the pitch promises visible errors, not that AI always wins.
@@ -25,7 +25,7 @@ The forest alone (trained on log units) was the most accurate week to week, but 
 
 | Weeks ahead | Forest alone WAPE | Forest alone bias | Correction factor (from out-of-bag) |
 | --- | --- | --- | --- |
-| 1 | 62.1% | -36% | x1.65 |
+| 1 | 62.2% | -36% | x1.65 |
 | 2 | 64.0% | -38% | x1.70 |
 | 3 | 65.7% | -39% | x1.75 |
-| 4 | 67.3% | -39% | x1.79 |
+| 4 | 67.3% | -39% | x1.78 |
